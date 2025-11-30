@@ -1,0 +1,144 @@
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    padding: 1.5rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+}
+
+.stat-card h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+/* Imputation Section */
+.imputation-section {
+    background: linear-gradient(to right, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.5)) !important;
+    border: 1px solid var(--border-color) !important;
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg) !important;
+    padding: 2rem !important;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-md);
+}
+
+.imputation-section h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-main) !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.imputation-section p {
+    color: var(--text-secondary) !important;
+    font-size: 1rem !important;
+    max-width: 600px;
+}
+
+/* Table Styles */
+.table-container {
+    overflow: auto;
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    margin: 2rem 0;
+    max-height: 600px;
+    box-shadow: var(--shadow-lg);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.9rem;
+}
+
+.data-table th {
+    background: var(--bg-secondary);
+    padding: 1rem 1.5rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-bottom: 2px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    white-space: nowrap;
+    backdrop-filter: blur(8px);
+}
+
+.data-table td {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-main);
+    white-space: nowrap;
+    transition: background var(--transition-fast);
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table tr:hover td {
+    background: var(--bg-hover);
+}
+
+/* Missing Value Badge */
+.missing-badge {
+    font-size: 0.75rem;
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--error);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    margin-left: 0.5rem;
+}
+
+/* Imputed Cell Highlight */
+.imputed-cell {
+    background-color: rgba(245, 158, 11, 0.1) !important;
+    color: var(--warning) !important;
+    font-weight: 500;
+    position: relative;
+}
+
+.imputed-cell::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 8px 8px 0;
+    border-color: transparent var(--warning) transparent transparent;
+}
