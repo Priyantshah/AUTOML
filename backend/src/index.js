@@ -9,7 +9,7 @@ dotenv.config({
 const PORT = process.env.PORT || 8000;
 
 // Increase timeout to 5 minutes
-const server = app.listen(PORT, async () => {
+const server = app.listen(PORT, "0.0.0.0", async () => {
     console.log(`⚙️ Server is running at port : ${PORT}`);
 
     // Verify Supabase Connection

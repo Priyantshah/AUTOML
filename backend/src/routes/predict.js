@@ -3,7 +3,7 @@ import { predict } from "../controllers/predictController.js";
 
 const router = express.Router();
 
-import upload from "../middlewares/uploadMiddleware.js";
+import upload from "../middlewares/fileUploadMiddleware.js";
 
 router.post("/", upload.single("file"), predict);
 
