@@ -1,7 +1,22 @@
 import axios from 'axios';
 
+
+let baseURL = import.meta.env.VITE_API_URL || '/api';
+
+// Ensure baseURL ends with /api if it's an absolute URL
+if (baseURL !== '/api') {
+    // Remove trailing slash if present
+    if (baseURL.endsWith('/')) {
+        baseURL = baseURL.slice(0, -1);
+    }
+    // Append /api if not present
+    if (!baseURL.endsWith('/api')) {
+        baseURL += '/api';
+    }
+}
+
 const client = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || '/api',
+    baseURL,
     headers: {
         'Content-Type': 'application/json',
     },
