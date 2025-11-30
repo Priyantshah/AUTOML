@@ -1,0 +1,185 @@
+/* EDAPage.css */
+
+.eda-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Target Selection Card */
+.highlight-card {
+    background: var(--bg-card);
+    border: 1px solid var(--primary-light);
+    box-shadow: var(--shadow-lg);
+}
+
+.highlight-card h3 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.form-select {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    transition: all var(--transition-fast);
+}
+
+.form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--primary-light);
+    outline: none;
+}
+
+/* Analysis Results */
+.target-type-badge {
+    display: inline-flex;
+    align-items: center;
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-weight: 600;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    margin-bottom: 2rem;
+}
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.recommendation-box,
+.relationships-box {
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    transition: transform var(--transition-normal);
+}
+
+.recommendation-box:hover,
+.relationships-box:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.recommendation-box {
+    background: linear-gradient(to bottom right, rgba(16, 185, 129, 0.05), transparent);
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+.relationships-box {
+    background: linear-gradient(to bottom right, rgba(99, 102, 241, 0.05), transparent);
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+.recommendation-box h4 {
+    color: var(--success);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.relationships-box h4 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.model-name {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.reason {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.insights-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.insights-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.insights-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+/* Correlation Matrix */
+.correlation-container {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.correlation-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.correlation-table th,
+.correlation-table td {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.correlation-table th {
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.correlation-table td:first-child {
+    background-color: var(--bg-secondary);
+    font-weight: 600;
+    color: var(--text-secondary);
+    position: sticky;
+    left: 0;
+    z-index: 5;
+}
+
+/* Scrollbar for matrix */
+.correlation-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.correlation-container::-webkit-scrollbar-track {
+    background: var(--bg-main);
+}
+
+.correlation-container::-webkit-scrollbar-thumb {
+    background: var(--bg-hover);
+    border-radius: 4px;
+}
