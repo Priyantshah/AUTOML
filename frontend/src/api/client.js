@@ -15,6 +15,8 @@ if (baseURL !== '/api') {
     }
 }
 
+console.log('API Client Base URL:', baseURL);
+
 const client = axios.create({
     baseURL,
     headers: {
