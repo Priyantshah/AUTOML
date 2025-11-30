@@ -86,7 +86,6 @@ const EDAPage = () => {
                             value={selectedTarget}
                             onChange={(e) => setSelectedTarget(e.target.value)}
                             className="form-select"
-                            style={{ width: '100%', padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #e5e7eb', marginBottom: '1rem' }}
                         >
                             <option value="">-- Select Target Column --</option>
                             {metadata?.columns?.map(col => (
@@ -94,7 +93,7 @@ const EDAPage = () => {
                             ))}
                         </select>
                         <button
-                            className="btn btn-secondary full-width"
+                            className="btn btn-secondary full-width mt-2"
                             onClick={handleAnalyzeTarget}
                             disabled={!selectedTarget || loading}
                         >
@@ -143,7 +142,7 @@ const EDAPage = () => {
                         {/* Correlations */}
                         <div className="card full-width animate-fade-in">
                             <h3>Correlation Matrix</h3>
-                            <div className="correlation-container" style={{ overflowX: 'auto' }}>
+                            <div className="correlation-container">
                                 {correlationKeys.length > 0 ? (
                                     <table className="data-table correlation-table">
                                         <thead>
@@ -157,7 +156,7 @@ const EDAPage = () => {
                                         <tbody>
                                             {correlationKeys.map(rowKey => (
                                                 <tr key={rowKey}>
-                                                    <td style={{ fontWeight: 'bold' }} title={rowKey}>{rowKey.length > 15 ? rowKey.substring(0, 15) + '...' : rowKey}</td>
+                                                    <td className="row-header" title={rowKey}>{rowKey.length > 15 ? rowKey.substring(0, 15) + '...' : rowKey}</td>
                                                     {correlationKeys.map(colKey => {
                                                         const val = correlationData[rowKey][colKey];
                                                         return (
@@ -165,9 +164,7 @@ const EDAPage = () => {
                                                                 key={`${rowKey}-${colKey}`}
                                                                 style={{
                                                                     backgroundColor: getCorrelationColor(val),
-                                                                    color: Math.abs(val) > 0.5 ? 'white' : '#ccc',
-                                                                    textAlign: 'center',
-                                                                    fontSize: '0.8rem'
+                                                                    color: Math.abs(val) > 0.5 ? 'white' : '#ccc'
                                                                 }}
                                                                 title={`${rowKey} vs ${colKey}: ${val}`}
                                                             >
@@ -197,7 +194,7 @@ const EDAPage = () => {
                     Proceed to Training <ArrowRight size={20} />
                 </button>
             </div>
-        </div>
+        </div >
     );
 };
 

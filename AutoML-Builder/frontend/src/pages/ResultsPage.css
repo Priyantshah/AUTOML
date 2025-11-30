@@ -8,19 +8,6 @@
 
 .page-header {
     margin-bottom: 2rem;
-    text-align: left;
-}
-
-.page-header h1 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 0.5rem;
-}
-
-.results-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -28,16 +15,16 @@
 
 /* Card Base Styles */
 .card {
-    background: #ffffff;
+    background: var(--bg-card);
     border-radius: 1rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-md);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    border: 1px solid #f3f4f6;
+    border: 1px solid var(--border-color);
 }
 
 .card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-lg);
 }
 
 /* Best Model Card - Premium Look */
@@ -46,8 +33,8 @@
     align-items: center;
     gap: 2.5rem;
     padding: 2.5rem;
-    background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
-    border: 1px solid #d1fae5;
+    background: var(--bg-card);
+    border: 1px solid var(--success);
     position: relative;
     overflow: hidden;
 }
@@ -59,23 +46,23 @@
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, #10b981, #34d399);
+    background: var(--success);
 }
 
 .trophy-icon {
-    background: #ffffff;
+    background: var(--bg-card);
     padding: 1.5rem;
     border-radius: 50%;
     box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #ecfdf5;
+    border: 2px solid rgba(16, 185, 129, 0.2);
 }
 
 .best-model-info h3 {
     font-size: 1.5rem;
-    color: #064e3b;
+    color: var(--success);
     margin-bottom: 1rem;
     font-weight: 700;
 }
@@ -95,14 +82,14 @@
     font-size: 0.875rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #6b7280;
+    color: var(--text-secondary);
     margin-bottom: 0.25rem;
 }
 
 .metric .value {
     font-size: 2rem;
     font-weight: 800;
-    color: #111827;
+    color: var(--text-main);
     line-height: 1;
 }
 
@@ -122,10 +109,10 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 1.25rem;
-    color: #374151;
+    color: var(--text-main);
     margin-bottom: 1.5rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid #f3f4f6;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .chart-wrapper {
@@ -144,10 +131,10 @@
 .table-card h3 {
     padding: 1.5rem 2rem;
     margin: 0;
-    background: #f9fafb;
-    border-bottom: 1px solid #e5e7eb;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
     font-size: 1.25rem;
-    color: #374151;
+    color: var(--text-main);
 }
 
 .table-responsive {
@@ -160,9 +147,9 @@ table {
 }
 
 th {
-    background-color: #f9fafb;
+    background-color: var(--bg-secondary);
     font-weight: 600;
-    color: #4b5563;
+    color: var(--text-secondary);
     text-transform: uppercase;
     font-size: 0.75rem;
     letter-spacing: 0.05em;
@@ -171,8 +158,8 @@ th {
 
 td {
     padding: 1rem 2rem;
-    color: #374151;
-    border-bottom: 1px solid #f3f4f6;
+    color: var(--text-main);
+    border-bottom: 1px solid var(--border-color);
     font-size: 0.95rem;
 }
 
@@ -181,21 +168,21 @@ tr:last-child td {
 }
 
 tr:hover td {
-    background-color: #f9fafb;
+    background-color: var(--bg-hover);
 }
 
 .highlight-row td {
-    background-color: #f0fdf4;
+    background-color: rgba(16, 185, 129, 0.1);
     font-weight: 600;
-    color: #064e3b;
+    color: var(--success);
 }
 
 .highlight-row:hover td {
-    background-color: #dcfce7;
+    background-color: rgba(16, 185, 129, 0.2);
 }
 
 .inline-trophy {
-    color: #f59e0b;
+    color: var(--warning);
     margin-left: 0.5rem;
     vertical-align: middle;
 }
@@ -213,15 +200,15 @@ tr:hover td {
 }
 
 .badge-blue {
-    background-color: #eff6ff;
-    color: #1d4ed8;
-    border: 1px solid #dbeafe;
+    background-color: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid rgba(99, 102, 241, 0.2);
 }
 
 .badge-green {
-    background-color: #ecfdf5;
-    color: #047857;
-    border: 1px solid #d1fae5;
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+    border: 1px solid rgba(16, 185, 129, 0.2);
 }
 
 /* Animations */

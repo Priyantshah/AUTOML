@@ -69,18 +69,25 @@ const TrainPage = () => {
                     <div className="training-status">
                         {training ? (
                             <div className="loader-container">
-                                <Loader className="spinner text-primary" size={64} />
-                                <h3>Training in Progress...</h3>
+                                <Loader className="spinner text-primary" size={80} />
+                                <div>
+                                    <h3>Training in Progress...</h3>
+                                    <p className="text-secondary">Optimizing models for your data</p>
+                                </div>
                                 <div className="progress-bar-container">
                                     <div className="progress-bar" style={{ width: `${progress}%` }}></div>
                                 </div>
-                                <p>{progress}% Complete</p>
+                                <p className="progress-text">{progress}% Complete</p>
                             </div>
                         ) : (
                             <div className="ready-state">
-                                <Play size={64} className="text-primary mb-4" />
+                                <div className="ready-icon-wrapper">
+                                    <Play size={64} className="text-primary" fill="currentColor" fillOpacity={0.2} />
+                                </div>
                                 <h3>Ready to Train</h3>
-                                <p>Target Variable: <span className="badge">{targetColumn}</span></p>
+                                <div className="target-info">
+                                    Target Variable: <span className="badge">{targetColumn}</span>
+                                </div>
                                 <button
                                     className="btn btn-primary btn-lg mt-4"
                                     onClick={handleTrain}

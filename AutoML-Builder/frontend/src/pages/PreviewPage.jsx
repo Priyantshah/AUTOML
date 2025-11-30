@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAutoML } from '../context/AutoMLContext';
 import client from '../api/client';
-import { ArrowRight, AlertCircle, Loader } from 'lucide-react';
+import { ArrowRight, AlertCircle, Loader, CheckCircle } from 'lucide-react';
 import './PreviewPage.css';
 
 const PreviewPage = () => {
@@ -147,23 +147,24 @@ const PreviewPage = () => {
             </div>
 
             {/* Imputation Section */}
-            <div className="imputation-section" style={{ background: '#1e1e1e', padding: '1.5rem', borderRadius: '8px', marginBottom: '2rem', border: '1px solid #333' }}>
-                <h3 style={{ marginBottom: '0.5rem', color: '#fff' }}>Handle Missing Values</h3>
-                <p style={{ marginBottom: '1rem', color: '#888', fontSize: '0.9rem' }}>
-                    Automatically detect and fill missing values across all columns using smart strategies (Median for numeric, Mode for categorical).
-                </p>
-                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+            <div className="imputation-section">
+                <div className="imputation-header">
+                    <h3>Handle Missing Values</h3>
+                    <p>Automatically detect and fill missing values across all columns using smart strategies (Median for numeric, Mode for categorical).</p>
+                </div>
+
+                <div className="imputation-controls">
                     <button
                         className="btn btn-primary"
                         onClick={handleImpute}
                         disabled={imputeLoading}
-                        style={{ height: '42px', minWidth: '200px' }}
                     >
-                        {imputeLoading ? 'Processing...' : 'Auto-Fill All Missing Values'}
+                        {imputeLoading ? <Loader className="spinner" size={18} /> : 'Auto-Fill All Missing Values'}
                     </button>
 
                     {imputeMessage && (
-                        <div style={{ padding: '0.5rem 1rem', borderRadius: '4px', background: imputeMessage.type === 'success' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)', color: imputeMessage.type === 'success' ? '#10b981' : '#ef4444', border: `1px solid ${imputeMessage.type === 'success' ? '#10b981' : '#ef4444'}` }}>
+                        <div className={`imputation-message ${imputeMessage.type}`}>
+                            {imputeMessage.type === 'success' ? <CheckCircle size={18} /> : <AlertCircle size={18} />}
                             {imputeMessage.text}
                         </div>
                     )}
@@ -171,53 +172,57 @@ const PreviewPage = () => {
             </div>
 
             <div className="table-container">
-                <table className="data-table">
-                    <thead>
-                        <tr>
-                            {columns.map((col) => {
-                                const missingCount = metadata?.missingCounts?.[col] || 0;
-                                return (
-                                    <th key={col}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                {rows.length > 0 ? (
+                    <table className="data-table">
+                        <thead>
+                            <tr>
+                                {columns.map((col) => {
+                                    const missingCount = metadata?.missingCounts?.[col] || 0;
+                                    return (
+                                        <th key={col}>
                                             {col}
                                             {missingCount > 0 && (
-                                                <span style={{
-                                                    fontSize: '0.75rem',
-                                                    background: '#ef4444',
-                                                    color: 'white',
-                                                    padding: '2px 6px',
-                                                    borderRadius: '10px',
-                                                    fontWeight: 'bold'
-                                                }}>
+                                                <span className="missing-badge">
                                                     {missingCount} missing
                                                 </span>
                                             )}
-                                        </div>
-                                    </th>
-                                );
-                            })}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {rows.map((row, idx) => (
-                            <tr key={idx}>
-                                {columns.map((col) => {
-                                    // Check if this cell was imputed
-                                    const isImputed = imputedIndicesMap[col] && imputedIndicesMap[col].includes(idx);
-                                    return (
-                                        <td
-                                            key={`${idx}-${col}`}
-                                            style={isImputed ? { backgroundColor: 'rgba(255, 193, 7, 0.2)', border: '1px solid #ffc107', color: '#ffc107', fontWeight: 'bold' } : {}}
-                                        >
-                                            {row[col]}
-                                        </td>
+                                        </th>
                                     );
                                 })}
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {rows.map((row, idx) => (
+                                <tr key={idx}>
+                                    {columns.map((col) => {
+                                        // Check if this cell was imputed
+                                        const isImputed = imputedIndicesMap[col] && imputedIndicesMap[col].includes(idx);
+                                        return (
+                                            <td
+                                                key={`${idx}-${col}`}
+                                                className={isImputed ? 'imputed-cell' : ''}
+                                                title={row[col]} // Show full content on hover
+                                            >
+                                                {row[col]}
+                                            </td>
+                                        );
+                                    })}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                ) : (
+                    <div className="empty-state">
+                        <p>No preview data available.</p>
+                    </div>
+                )}
             </div>
+
+            {rows.length > 0 && (
+                <div className="table-footer">
+                    <p>Showing first <strong>{rows.length}</strong> rows of <strong>{metadata?.rowCount || 'unknown'}</strong> total rows.</p>
+                </div>
+            )}
 
             <div className="actions right">
                 <button className="btn btn-primary" onClick={() => navigate('/eda')}>

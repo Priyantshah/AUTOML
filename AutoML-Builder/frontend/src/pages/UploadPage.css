@@ -1,13 +1,11 @@
-.page-container {
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-}
+/* UploadPage.css */
 
 .upload-container {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .upload-card {
@@ -18,6 +16,12 @@
     box-shadow: var(--shadow-lg);
     position: relative;
     overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.upload-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
 .upload-card::before {
@@ -35,8 +39,8 @@
     border-radius: var(--radius-lg);
     padding: 4rem 2rem;
     text-align: center;
-    transition: all var(--transition-normal);
-    background-color: rgba(30, 41, 59, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--bg-hover);
     position: relative;
     cursor: pointer;
     display: flex;
@@ -48,14 +52,14 @@
 .file-drop-area:hover,
 .file-drop-area.active {
     border-color: var(--primary);
-    background-color: rgba(99, 102, 241, 0.05);
+    background: var(--bg-secondary);
     transform: scale(1.01);
 }
 
 .file-drop-area svg {
     color: var(--primary);
-    filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.3));
-    transition: transform var(--transition-normal);
+    filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.4));
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .file-drop-area:hover svg {
@@ -66,6 +70,7 @@
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0;
+    color: var(--text-main);
 }
 
 .text-secondary {
@@ -81,7 +86,7 @@
     align-items: center;
     gap: 1rem;
     border: 1px solid var(--border-color);
-    animation: slideUp 0.3s ease-out;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes slideUp {
@@ -104,6 +109,7 @@
     color: var(--text-muted);
     font-size: 0.9rem;
     margin-left: auto;
+    font-variant-numeric: tabular-nums;
 }
 
 .error-message {
@@ -140,6 +146,7 @@
     width: 100%;
     padding: 1rem;
     font-size: 1.1rem;
+    letter-spacing: 0.025em;
 }
 
 .spinner {
@@ -148,5 +155,5 @@
     border: 3px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     border-top-color: white;
-    animation: spin 1s ease-in-out infinite;
+    animation: spin 1s linear infinite;
 }

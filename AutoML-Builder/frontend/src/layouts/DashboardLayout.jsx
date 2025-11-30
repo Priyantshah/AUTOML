@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import { LayoutDashboard, Upload, FileText, BarChart2, Cpu, Zap } from 'lucide-react';
+import { ThemeToggle } from '../components/ui/ThemeToggle';
 import './DashboardLayout.css';
 
 const DashboardLayout = () => {
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    };
+
     return (
         <div className="dashboard-layout">
             <aside className="sidebar">
@@ -36,6 +48,10 @@ const DashboardLayout = () => {
                 </nav>
 
                 <div className="sidebar-footer">
+                    <div className="theme-toggle-wrapper">
+                        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+                        <span>{theme === 'light' ? 'Light Mode' : 'Dark Mode'}</span>
+                    </div>
                     <p>© 2025 AutoML Builder</p>
                 </div>
             </aside>

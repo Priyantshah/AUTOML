@@ -106,13 +106,8 @@ const PredictPage = () => {
                                     <label htmlFor={col}>
                                         {col}
                                         {edaResults?.correlation?.[targetColumn]?.[col] && (
-                                            <span style={{
-                                                marginLeft: '0.5rem',
-                                                fontSize: '0.8rem',
-                                                color: '#888',
-                                                fontWeight: 'normal'
-                                            }}>
-                                                (corr: {Math.abs(edaResults.correlation[targetColumn][col]).toFixed(2)})
+                                            <span className="corr-badge">
+                                                corr: {Math.abs(edaResults.correlation[targetColumn][col]).toFixed(2)}
                                             </span>
                                         )}
                                     </label>

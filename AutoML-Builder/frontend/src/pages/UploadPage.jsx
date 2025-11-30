@@ -61,9 +61,9 @@ const UploadPage = () => {
 
             <div className="upload-card card">
                 <form onSubmit={handleUpload} className="upload-form">
-                    <label className="file-drop-area" style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '2rem', border: '2px dashed #444', borderRadius: '8px' }}>
+                    <label className="file-drop-area">
                         <UploadCloud size={64} className="text-primary" />
-                        <h3>Drag & Drop or Click to Upload</h3>
+                        <h3> Click to Upload</h3>
                         <p className="text-secondary">Supported formats: CSV</p>
                         <input
                             type="file"
