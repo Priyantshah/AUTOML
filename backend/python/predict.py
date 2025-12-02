@@ -41,7 +41,7 @@ def predict(model_url, input_data=None, input_file=None):
                  tmp_path = model_url.strip('"').strip("'")
                  is_temp = False
             else:
-                 raise Exception(f"Invalid model path or URL: {model_url}")
+                 raise Exception(f"Invalid model path or URL: {model_url}. If you are running the backend on a remote server (e.g. Render) and trained the model locally, the server cannot access your local file path. Please train the model on the server or use a public URL.")
 
         # 2. Load Model
         artifact = joblib.load(tmp_path)

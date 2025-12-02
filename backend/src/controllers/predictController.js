@@ -8,6 +8,11 @@ export const predict = async (req, res) => {
         const { modelUrl, inputData } = req.body;
         const file = req.file;
 
+        console.log("Predict Request Received:");
+        console.log("Model URL:", modelUrl);
+        console.log("File:", file ? "Present" : "None");
+        console.log("Input Data:", inputData ? "Present" : "None");
+
         if (!modelUrl) {
             return res.status(400).json({ error: "modelUrl is required" });
         }
@@ -33,6 +38,7 @@ export const predict = async (req, res) => {
         const result = await runPython(pythonArgs);
 
         if (result.error) {
+            console.error("Python Script Error:", result.error);
             if (tempInputPath) await fs.promises.unlink(tempInputPath).catch(() => { });
             return res.status(500).json({ error: result.error });
         }
