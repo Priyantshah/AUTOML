@@ -69,6 +69,10 @@ const PredictPage = () => {
                 }
             });
 
+            console.log("Sending Prediction Request...");
+            console.log("Model URL:", modelUrl);
+            console.log("Input Data:", processedData);
+
             const response = await client.post('/predict', {
                 modelUrl,
                 inputData: [processedData] // Backend expects list of dicts
@@ -76,7 +80,14 @@ const PredictPage = () => {
             setPrediction(response.data.data);
         } catch (err) {
             console.error("Prediction failed:", err);
-            setError(err.response?.data?.error || err.message || "Prediction failed.");
+            if (err.response) {
+                console.error("Error Response Data:", err.response.data);
+                console.error("Error Response Status:", err.response.status);
+            }
+            const errorMessage = err.response?.data?.error || err.message || "Prediction failed.";
+            setError(errorMessage);
+
+            // Also set a debug state if you want to show it in UI (optional, but let's stick to console for now)
         } finally {
             setLoading(false);
         }

@@ -110,7 +110,8 @@ def predict(model_url, input_data=None, input_file=None):
         print(json.dumps(result, cls=NpEncoder))
 
     except Exception as e:
-        print(json.dumps({"error": str(e)}))
+        import traceback
+        print(json.dumps({"error": str(e), "traceback": traceback.format_exc()}))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
