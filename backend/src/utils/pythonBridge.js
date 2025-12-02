@@ -2,7 +2,8 @@ import { spawn } from "child_process";
 
 export const runPython = (args, onData) => {
     return new Promise((resolve, reject) => {
-        const py = spawn("python", args);
+        const pythonCommand = process.platform === "win32" ? "python" : "python3";
+        const py = spawn(pythonCommand, args);
 
         let output = "";
         let error = "";
