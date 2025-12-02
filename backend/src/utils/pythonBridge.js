@@ -5,6 +5,11 @@ export const runPython = (args, onData) => {
         const pythonCommand = process.platform === "win32" ? "python" : "python3";
         const py = spawn(pythonCommand, args);
 
+        py.on('error', (err) => {
+            console.error("Failed to start Python process:", err);
+            reject(new Error(`Failed to start Python process: ${err.message}`));
+        });
+
         let output = "";
         let error = "";
         let lineBuffer = "";
@@ -67,7 +72,7 @@ export const runPython = (args, onData) => {
             } catch (e) {
                 console.error("Python Output Parse Error:", e);
                 console.error("Raw Output:", output);
-                if (error) return reject(error);
+                if (error) return reject(new Error(error));
                 return reject(new Error("Failed to parse Python script output. Check server logs for details."));
             }
         });

@@ -90,6 +90,7 @@ export const predict = async (req, res) => {
 
     } catch (err) {
         console.error("Prediction error:", err);
-        res.status(500).json({ error: err.message });
+        const errorMessage = err.message || String(err);
+        res.status(500).json({ error: errorMessage });
     }
 };
