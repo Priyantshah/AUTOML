@@ -59,25 +59,27 @@ export const trainModels = async (req, res) => {
 
                 if (error) {
                     console.error("Model upload failed:", error);
+                    // Do not delete local file if upload fails, so we can use it locally/temporarily
                 } else {
                     const { data: publicUrlData } = supabase.storage
                         .from(bucketName)
                         .getPublicUrl(modelFileName);
 
                     modelUrl = publicUrlData.publicUrl;
+
+                    // Cleanup local file only if upload succeeded
+                    try {
+                        if (fs.existsSync(result.model_path)) {
+                            fs.unlinkSync(result.model_path);
+                        }
+                    } catch (cleanupErr) {
+                        console.error("Failed to cleanup model file:", cleanupErr);
+                    }
                 }
 
             } catch (uploadErr) {
                 console.error("Model upload error:", uploadErr);
-            } finally {
-                // Cleanup local file safely
-                try {
-                    if (fs.existsSync(result.model_path)) {
-                        fs.unlinkSync(result.model_path);
-                    }
-                } catch (cleanupErr) {
-                    console.error("Failed to cleanup model file:", cleanupErr);
-                }
+                // Do not delete local file if error
             }
         }
 
